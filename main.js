@@ -1,4 +1,4 @@
-API_URL = 'https://api.github.com/users/';
+
 
 const form = document.getElementById('form');
 const search = document.getElementById('search');
@@ -8,27 +8,27 @@ const main = document.getElementById('main');
 
 async function getUser(username) {
     try {
-        const { data } = await axios(APIURL + username)
+        const { data } = await axios(API_URL + username);
         console.log(data);
         createUserCard(data);
         getRepos(username);
-    }
-    catch (err) {
-        if (err.response.status == 404) {
+    } catch (err) {
+        if (err.response && err.response.status == 404) {
             createErrorCard('No profile with this username');
+        } else {
+            createErrorCard('An error occurred');
         }
-
     }
-
 }
 
 async function getRepos(username) {
     try {
-        const { data } = await axios(APIURL + username + '/repos?sort=created');
+        const { data } = await axios(API_URL + username + '/repos?sort=created');
         console.log(data);
         addReposToCard(data);
     }
     catch (err) {
+        console.log(err);
         createErrorCard('Problem fetching repos');
     }
 }
