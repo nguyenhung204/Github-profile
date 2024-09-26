@@ -1,4 +1,4 @@
-
+API_URL = 'https://api.github.com/users/';
 
 const form = document.getElementById('form');
 const search = document.getElementById('search');
